@@ -5,7 +5,9 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-dark bg-primary">
             <div className="container">
-                <h2 className="navbar-brand mb-0">Team</h2>
+                <NavLink className="navbar-brand mb-0" to={'/'}>
+                    Team
+                </NavLink>
                 <button
                     className="navbar-toggler"
                     type="button"

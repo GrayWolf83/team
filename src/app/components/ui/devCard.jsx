@@ -10,6 +10,11 @@ const DevCard = ({ developer }) => {
 
     return (
         <div className="card">
+            <button
+                className="btn btn-primary m-2 ms-auto"
+                onClick={() => changeBookmark(developer.name)}>
+                <i className={`bi bi-bookmark${bookmarkClass}`}></i>
+            </button>
             <img
                 src={developer.image}
                 className="card-img-top mt-1"
@@ -19,21 +24,21 @@ const DevCard = ({ developer }) => {
             <div className="card-body">
                 <h5 className="card-title">
                     {developer.name}{' '}
-                    <Badge color="warning" content={developer.role} />
+                    <Badge color="info" content={developer.role} />
                 </h5>
                 <p className="mb-1">Возраст: {developer.age}</p>
 
-                <div className="d-flex justify-content-between mt-2">
+                <div className="d-flex justify-content-between mt-3">
                     <NavLink
                         to={`/${developer.id}`}
                         className="btn btn-primary shadow">
                         Подробнее
                     </NavLink>
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => changeBookmark(developer.name)}>
-                        <i className={`bi bi-bookmark${bookmarkClass}`}></i>
-                    </button>
+                    <NavLink
+                        to={`/${developer.id}`}
+                        className="btn btn-info text-white shadow">
+                        Отзывы
+                    </NavLink>
                 </div>
             </div>
         </div>
