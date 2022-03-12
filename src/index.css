@@ -1,5 +1,6 @@
 :root {
     --primary-color: #4caf50;
+    --info-color: #10a1f5;
     --secondary-color: #6c757d;
     --success-color: #198754;
 }
@@ -32,6 +33,10 @@ i.bi {
     background-color: var(--success-color) !important;
 }
 
+.bg-info {
+    background-color: var(--info-color) !important;
+}
+
 .text-primary {
     color: var(--primary-color) !important;
 }
@@ -45,6 +50,18 @@ i.bi {
     background-color: #fff !important;
     color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+}
+
+.btn-info {
+    background-color: var(--info-color) !important;
+    border-color: var(--info-color) !important;
+    color: #fff !important;
+}
+
+.btn-info:hover {
+    background-color: #fff !important;
+    color: var(--info-color) !important;
+    border-color: var(--info-color) !important;
 }
 
 .nav-link {

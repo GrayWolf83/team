@@ -21,7 +21,7 @@ export const DataProvider = ({ children }) => {
         setTimeout(() => {
             setDevelopers([
                 createDeveloper('Сергей', 38, 'TeamLead'),
-                createDeveloper('Максим', 23, 'developer'),
+                createDeveloper('Максим', 22, 'developer'),
                 createDeveloper('Бешил', 25, 'developer')
             ])
             setLoading(false)
