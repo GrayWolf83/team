@@ -1,30 +1,18 @@
 import React from 'react'
 import DevCard from '../components/ui/devCard'
+import { useData } from '../hooks/useData'
 
 const HomePage = () => {
-    const developers = [
-        {
-            id: '1',
-            name: 'Сергей',
-            age: 'some',
-            description: '',
-            bookmark: false
-        },
-        {
-            id: '2',
-            name: 'Максим',
-            age: 'some',
-            description: '',
-            bookmark: false
-        },
-        { id: '3', name: 'Бешил', age: 'some', description: '', bookmark: true }
-    ]
+    const { developers } = useData()
+
     return (
         <div className="container pt-5">
             <h1 className="mb-5 text-center">Наша команда</h1>
-            <div className="row justify-content-around">
+            <div className="row">
                 {developers.map((dev) => (
-                    <DevCard key={dev.id} developer={dev} />
+                    <div className="col-12 col-md-4" key={dev.id}>
+                        <DevCard developer={dev} />
+                    </div>
                 ))}
             </div>
         </div>
