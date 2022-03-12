@@ -1,5 +1,7 @@
 :root {
     --primary-color: #4caf50;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
 }
 
 body {
@@ -18,6 +20,12 @@ code {
 
 .bg-primary {
     background-color: var(--primary-color) !important;
+}
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+.bg-success {
+    background-color: var(--success-color) !important;
 }
 
 .text-primary {
@@ -53,7 +61,7 @@ code {
 }
 .lds-ripple div {
     position: absolute;
-    border: 4px solid #4caf50;
+    border: 4px solid var(--primary-color);
     opacity: 1;
     border-radius: 50%;
     animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -84,12 +92,24 @@ code {
     justify-content: center;
 }
 
-/* ===========HOMEPAGE================= */
 .card {
     transition: box-shadow ease-out 0.5s;
 }
+
 .card:hover {
-    /* box-shadow: 5px 5px 0px 0 #bec1c7; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: box-shadow ease-out 0.5s;
+}
+  .badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    margin: 0.25rem;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
 }
