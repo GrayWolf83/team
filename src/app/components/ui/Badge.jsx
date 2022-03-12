@@ -6,6 +6,6 @@ const Badge = ({ color, content }) => {
 }
 Badge.propTypes = {
     color: PropTypes.string,
-    name: PropTypes.string
+    content: PropTypes.string
 }
 export default Badge

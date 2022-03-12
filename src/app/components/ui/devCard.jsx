@@ -1,37 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
+import { useData } from '../../hooks/useData'
+import Badge from './Badge'
 
 const DevCard = ({ developer }) => {
+    const { changeBookmark } = useData()
     const bookmarkClass = developer.bookmark ? '-fill' : ''
+
     return (
-        <div className="card col-3">
+        <div className="card">
             <img
-                src={`https://avatars.dicebear.com/api/avataaars/${(
-                    Math.random() + 1
-                )
-                    .toString(36)
-                    .substring(7)}.svg`}
+                src={developer.image}
                 className="card-img-top mt-1"
-                alt="avatar"
+                alt={developer.name}
                 style={{ maxHeight: '150px' }}
             />
             <div className="card-body">
-                <h5 className="card-title">{developer.name}</h5>
+                <h5 className="card-title">
+                    {developer.name}{' '}
+                    <Badge color="warning" content={developer.role} />
+                </h5>
                 <p className="mb-1">Возраст: {developer.age}</p>
-                <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Recusandae possimus nostrum odio enim minus distinctio,
-                    rerum quas, maxime perferendis sint doloribus delectus
-                    excepturi officiis. Nobis repudiandae nostrum voluptates
-                    veritatis vel?
-                </p>
-                <div className="d-flex justify-content-between">
-                    <a href="#" className="btn btn-primary">
+
+                <div className="d-flex justify-content-between mt-2">
+                    <NavLink
+                        to={`/${developer.id}`}
+                        className="btn btn-primary shadow">
                         Подробнее
-                    </a>
-                    <button className="btn btn-success">
+                    </NavLink>
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => changeBookmark(developer.name)}>
                         <i className={`bi bi-bookmark${bookmarkClass}`}></i>
-                        {/* <i className="bi bi-bookmark-fill"></i> */}
                     </button>
                 </div>
             </div>
