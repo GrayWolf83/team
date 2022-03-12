@@ -92,7 +92,15 @@ code {
     justify-content: center;
 }
 
-.badge {
+.card {
+    transition: box-shadow ease-out 0.5s;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow ease-out 0.5s;
+}
+  .badge {
     display: inline-block;
     padding: 0.35em 0.65em;
     margin: 0.25rem;
