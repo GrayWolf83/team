@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Loader from './components/ui/Loader'
 import Navbar from './components/ui/Navbar'
 import DeveloperPage from './pages/DeveloperPage'
 import FavoritesPage from './pages/FavoritesPage'
@@ -17,8 +16,6 @@ function App() {
                 <Route exact path={'/'} component={HomePage} />
                 <Route path={'/:developerId?'} component={DeveloperPage} />
             </Switch>
-
-            <Loader />
         </>
     )
 }
