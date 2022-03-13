@@ -155,3 +155,12 @@ i.bi {
     width: 100px;
     height: 100px;
 }
+
+.breadcrumb-item,
+.breadcrumb-item a {
+    color: var(--primary-color) !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--secondary-color) !important;
+}
