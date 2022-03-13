@@ -6,7 +6,7 @@ import FormComponent from '../components/common/FormComponent'
 import Badge from '../components/ui/Badge'
 import { useData } from '../hooks/useData'
 import { reviewSchema } from '../validation/yup.schema'
-import { getDateToString } from '../utils/getDateToString'
+// import { getDateToString } from '../utils/getDateToString'
 import { createComment } from '../utils/createComment'
 
 const ReviewsPage = () => {
@@ -58,7 +58,7 @@ const ReviewsPage = () => {
                 </div>
             </div>
 
-            <div className="row mt-3">
+            {/* <div className="row mt-3">
                 {developer.reviews.length ? (
                     developer.reviews.map((item) => (
                         <div className="card mb-2" key={item.text}>
@@ -78,7 +78,7 @@ const ReviewsPage = () => {
                         У этого разработчика еще нет отзывов
                     </p>
                 )}
-            </div>
+            </div> */}
         </div>
     )
 }

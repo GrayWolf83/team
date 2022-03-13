@@ -40,6 +40,7 @@ http.interceptors.request.use(
 http.interceptors.response.use(
     (res) => {
         res.data = { content: { ...res.data } }
+
         return res
     },
     function (error) {

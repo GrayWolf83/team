@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import { useData } from '../../hooks/useData'
 import Badge from './Badge'
+import localStorageService from '../../services/localStorage.service'
+import { useEffect } from 'react'
 
 const DevCard = ({ developer }) => {
     const { changeBookmark } = useData()
-    const bookmarkClass = developer.bookmark ? '-fill' : ''
+    const [bookmark, setBookmark] = useState(false)
+
+    useEffect(() => {
+        setBookmark(Boolean(localStorageService.getBookmark(developer.id)))
+    }, [changeBookmark])
+
+    const bookmarkClass = bookmark ? '-fill' : ''
 
     return (
         <div className="card mb-3">
             <button
                 className="btn btn-primary m-2 ms-auto"
-                onClick={() => changeBookmark(developer.name)}>
+                onClick={() => changeBookmark(developer.id)}>
                 <i className={`bi bi-bookmark${bookmarkClass}`}></i>
             </button>
             <img
