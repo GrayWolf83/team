@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import { createDeveloper } from '../utils/createDeveloper'
+import { createDeveloperData } from '../utils/createDeveloper'
 import { PropTypes } from 'prop-types'
 import Loader from '../components/ui/Loader'
 import localStorageService from '../services/localStorage.service'
+import developerService from '../services/developer.service'
 
 const DataContext = React.createContext()
 
@@ -12,56 +13,81 @@ export const useData = () => {
 }
 
 export const DataProvider = ({ children }) => {
-    const [developers, setDevelopers] = useState()
+    const [developers, setDevelopers] = useState([])
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            setDevelopers([
-                createDeveloper('Сергей', 38, 'TeamLead'),
-                createDeveloper('Максим', 22, 'developer'),
-                createDeveloper('Бешил', 25, 'developer')
-            ])
-            setLoading(false)
-        }, 1500)
+        getDeveloperList()
     }, [])
+
+    async function getDeveloperList() {
+        setLoading(true)
+        try {
+            const { content } = await developerService.getDevelopers()
+            if (Object.keys(content).length) {
+                setDevelopers(Object.values(content).map((item) => item))
+            } else {
+                await createDeveloper({
+                    name: 'Сергей',
+                    age: 38,
+                    role: 'TeamLead',
+                    image: 'https://avatars.dicebear.com/api/avataaars/7rii5l.svg'
+                })
+                await createDeveloper({
+                    name: 'Максим',
+                    age: 22,
+                    role: 'Developer',
+                    image: 'https://avatars.dicebear.com/api/avataaars/uufr4k.svg'
+                })
+                await createDeveloper({
+                    name: 'Бешил',
+                    age: 25,
+                    role: 'Developer',
+                    image: 'https://avatars.dicebear.com/api/avataaars/apabe.svg'
+                })
+                await getDeveloperList()
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    async function createDeveloper(devData) {
+        setLoading(true)
+        const developer = createDeveloperData(devData)
+        console.log(developer)
+        try {
+            await developerService.createDeveloper(developer)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     function getDeveloperById(id) {
         return developers.find((developer) => developer.id === id)
-    }
-
-    function addReview(id, content) {
-        setDevelopers((prevState) =>
-            prevState.map((developer) => {
-                if (developer.id === id) {
-                    return {
-                        ...developer,
-                        reviews: [...developer.reviews, content]
-                    }
-                }
-
-                return developer
-            })
-        )
     }
 
     function getBookmarkedDevelopers() {
         return developers.filter((developer) => developer.bookmark)
     }
 
-    function changeBookmark(name) {
-        localStorageService.changeBookmark(name)
-        setDevelopers((prevState) => [
-            ...prevState.map((developer) => {
-                if (developer.name == name) {
+    function changeBookmark(id) {
+        localStorageService.changeBookmark(id)
+        setDevelopers(
+            developers.map((developer) => {
+                if (developer.id === id) {
                     return {
                         ...developer,
-                        bookmark: !developer.bookmark
+                        bookmark: Boolean(localStorageService.getBookmark(id))
                     }
                 }
                 return developer
             })
-        ])
+        )
     }
 
     return (
@@ -70,8 +96,7 @@ export const DataProvider = ({ children }) => {
                 developers,
                 changeBookmark,
                 getDeveloperById,
-                getBookmarkedDevelopers,
-                addReview
+                getBookmarkedDevelopers
             }}>
             {isLoading ? <Loader /> : children}
         </DataContext.Provider>

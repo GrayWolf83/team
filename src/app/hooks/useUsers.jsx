@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import userService from '../services/user.service'
+import Loader from '../components/ui/Loader'
 
 const UserContext = React.createContext()
 
@@ -38,7 +39,7 @@ const UserProvider = ({ children }) => {
 
     return (
         <UserContext.Provider value={{ users }}>
-            {!isLoading ? children : 'Loading...'}
+            {!isLoading ? children : <Loader />}
         </UserContext.Provider>
     )
 }
