@@ -1,6 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { createDeveloper } from '../utils/createDeveloper'
 import { PropTypes } from 'prop-types'
@@ -32,6 +30,21 @@ export const DataProvider = ({ children }) => {
         return developers.find((developer) => developer.id === id)
     }
 
+    function addReview(id, content) {
+        setDevelopers((prevState) =>
+            prevState.map((developer) => {
+                if (developer.id === id) {
+                    return {
+                        ...developer,
+                        reviews: [...developer.reviews, content]
+                    }
+                }
+
+                return developer
+            })
+        )
+    }
+
     function getBookmarkedDevelopers() {
         return developers.filter((developer) => developer.bookmark)
     }
@@ -57,7 +70,8 @@ export const DataProvider = ({ children }) => {
                 developers,
                 changeBookmark,
                 getDeveloperById,
-                getBookmarkedDevelopers
+                getBookmarkedDevelopers,
+                addReview
             }}>
             {isLoading ? <Loader /> : children}
         </DataContext.Provider>

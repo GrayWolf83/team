@@ -9,7 +9,7 @@ const DevCard = ({ developer }) => {
     const bookmarkClass = developer.bookmark ? '-fill' : ''
 
     return (
-        <div className="card">
+        <div className="card mb-3">
             <button
                 className="btn btn-primary m-2 ms-auto"
                 onClick={() => changeBookmark(developer.name)}>
@@ -35,7 +35,7 @@ const DevCard = ({ developer }) => {
                         Подробнее
                     </NavLink>
                     <NavLink
-                        to={`/${developer.id}`}
+                        to={`/reviews/${developer.id}`}
                         className="btn btn-info text-white shadow">
                         Отзывы
                     </NavLink>

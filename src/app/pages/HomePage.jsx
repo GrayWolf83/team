@@ -6,7 +6,7 @@ const HomePage = () => {
     const { developers } = useData()
 
     return (
-        <div className="container pt-5">
+        <div className="container mt-4">
             <h1 className="mb-5 text-center">Наша команда</h1>
             <div className="row">
                 {developers.map((dev) => (
