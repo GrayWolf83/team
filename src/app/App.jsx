@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from './components/ui/Navbar'
+import AuthProvider from './hooks/useAuth'
 import { CommentsProvider } from './hooks/useComments'
 import { DataProvider } from './hooks/useData'
 import UserProvider from './hooks/useUsers'
@@ -17,6 +18,7 @@ function App() {
             <DataProvider>
                 <CommentsProvider>
                     <UserProvider>
+                        <AuthProvider>
                         <Switch>
                             <Route
                                 path={'/favorites'}
@@ -37,6 +39,7 @@ function App() {
                                 component={DeveloperPage}
                             />
                         </Switch>
+                      </AuthProvider>
                     </UserProvider>
                 </CommentsProvider>
             </DataProvider>
