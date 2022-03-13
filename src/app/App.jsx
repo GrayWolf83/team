@@ -23,7 +23,7 @@ function App() {
                                 component={FavoritesPage}
                             />
                             <Route
-                                path={'/comments/:developerId'}
+                                path={'/comments/:developerId?'}
                                 component={CommentsPage}
                             />
                             <Route
