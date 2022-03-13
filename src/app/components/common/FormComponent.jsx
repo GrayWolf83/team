@@ -47,7 +47,7 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     }
 
     return (
-        <form autoComplete="false" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             {React.Children.map(children, (child) => {
                 const config = {
                     ...child.props,
@@ -58,15 +58,17 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
 
                 return React.cloneElement(child, config)
             })}
-            <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={
-                    Object.keys(error).length ||
-                    Object.values(data).every((item) => item === '')
-                }>
-                {btnLabel}
-            </button>
+            <div className="w-100 d-flex justify-content-center">
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={
+                        Object.keys(error).length ||
+                        Object.values(data).every((item) => item === '')
+                    }>
+                    {btnLabel}
+                </button>
+            </div>
         </form>
     )
 }

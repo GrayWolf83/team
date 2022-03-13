@@ -16,32 +16,32 @@ function App() {
         <>
             <Navbar />
             <DataProvider>
-                <CommentsProvider>
-                    <UserProvider>
-                        <AuthProvider>
-                        <Switch>
-                            <Route
-                                path={'/favorites'}
-                                component={FavoritesPage}
-                            />
-                            <Route
-                                path={'/comments/:developerId?'}
-                                component={CommentsPage}
-                            />
-                            <Route
-                                exact
-                                path={'/auth/:method'}
-                                component={AuthPage}
-                            />
-                            <Route exact path={'/'} component={HomePage} />
-                            <Route
-                                path={'/:developerId?'}
-                                component={DeveloperPage}
-                            />
-                        </Switch>
-                      </AuthProvider>
-                    </UserProvider>
-                </CommentsProvider>
+                <AuthProvider>
+                    <CommentsProvider>
+                        <UserProvider>
+                            <Switch>
+                                <Route
+                                    path={'/favorites'}
+                                    component={FavoritesPage}
+                                />
+                                <Route
+                                    path={'/comments/:developerId?'}
+                                    component={CommentsPage}
+                                />
+                                <Route
+                                    exact
+                                    path={'/auth/:method'}
+                                    component={AuthPage}
+                                />
+                                <Route exact path={'/'} component={HomePage} />
+                                <Route
+                                    path={'/:developerId?'}
+                                    component={DeveloperPage}
+                                />
+                            </Switch>
+                        </UserProvider>
+                    </CommentsProvider>
+                </AuthProvider>
             </DataProvider>
         </>
     )

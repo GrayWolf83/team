@@ -22,12 +22,13 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                     id={name}
                     name={name}
                     value={value}
+                    autoComplete={name}
                     onChange={handleChange}
                     className={getInputClasses()}
                 />
                 {type === 'password' && (
                     <button
-                        className="btn btn-outline-secondary"
+                        className="btn btn-outline-primary"
                         type="button"
                         onClick={toggleShowPassword}>
                         <i
