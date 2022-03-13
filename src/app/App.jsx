@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from './components/ui/Navbar'
+import AuthProvider from './hooks/useAuth'
 import { CommentsProvider } from './hooks/useComments'
 import { DataProvider } from './hooks/useData'
 import UserProvider from './hooks/useUsers'
@@ -17,26 +18,28 @@ function App() {
             <DataProvider>
                 <CommentsProvider>
                     <UserProvider>
-                        <Switch>
-                            <Route
-                                path={'/favorites'}
-                                component={FavoritesPage}
-                            />
-                            <Route
-                                path={'/comments/:developerId'}
-                                component={CommentsPage}
-                            />
-                            <Route
-                                exact
-                                path={'/auth/:method'}
-                                component={AuthPage}
-                            />
-                            <Route exact path={'/'} component={HomePage} />
-                            <Route
-                                path={'/:developerId?'}
-                                component={DeveloperPage}
-                            />
-                        </Switch>
+                        <AuthProvider>
+                            <Switch>
+                                <Route
+                                    path={'/favorites'}
+                                    component={FavoritesPage}
+                                />
+                                <Route
+                                    path={'/comments/:developerId'}
+                                    component={CommentsPage}
+                                />
+                                <Route
+                                    exact
+                                    path={'/auth/:method'}
+                                    component={AuthPage}
+                                />
+                                <Route exact path={'/'} component={HomePage} />
+                                <Route
+                                    path={'/:developerId?'}
+                                    component={DeveloperPage}
+                                />
+                            </Switch>
+                        </AuthProvider>
                     </UserProvider>
                 </CommentsProvider>
             </DataProvider>
