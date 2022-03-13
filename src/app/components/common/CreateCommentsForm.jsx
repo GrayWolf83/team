@@ -14,7 +14,11 @@ const CreateCommentsForm = ({ developerId }) => {
     const history = useHistory()
 
     const handleSubmit = (data) => {
-        const content = createComment({ ...data, developerId })
+        const content = createComment({
+            ...data,
+            developerId,
+            userId: currentUser.id
+        })
         if (currentUser) {
             addComment(content)
         } else {
@@ -25,7 +29,9 @@ const CreateCommentsForm = ({ developerId }) => {
     return (
         <div className="card shadow">
             <div className="card-body">
-                <h5 className="card-title text-primary">Добавить отзыв</h5>
+                <p className="card-title text-danger">
+                    * Добавлять отзывы могут только авторизованные пользователи
+                </p>
                 <div className="row">
                     <div className="col-12 col-md-8 offset-md-2">
                         <FormComponent
