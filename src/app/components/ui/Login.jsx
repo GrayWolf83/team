@@ -33,6 +33,13 @@ const Login = () => {
         } catch (error) {
             // console.log(error)
             setErrors(error)
+    const handleSubmit = (payload) => {
+        console.log(payload)
+
+        if (history.location.state) {
+            history.push(history.location.state.path)
+        } else {
+            history.push('/')
         }
     }
 

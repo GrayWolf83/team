@@ -1,8 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CommentCard from './CommentCard'
+import { useComments } from '../../hooks/useComments'
 
-const CommentsList = ({ comments }) => {
+const CommentsList = ({ developerId }) => {
+    const { getCommentsByDeveloperId } = useComments()
+    const comments = getCommentsByDeveloperId(developerId)
+
     return (
         <div className="row mt-3">
             {comments.length ? (
@@ -19,7 +23,7 @@ const CommentsList = ({ comments }) => {
 }
 
 CommentsList.propTypes = {
-    comments: PropTypes.array
+    developerId: PropTypes.string
 }
 
 export default CommentsList
