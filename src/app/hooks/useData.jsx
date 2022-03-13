@@ -23,8 +23,8 @@ export const DataProvider = ({ children }) => {
     async function getDeveloperList() {
         try {
             const { content } = await developerService.getDevelopers()
-            if (Object.keys(content).length) {
-                setDevelopers(Object.values(content).map((item) => item))
+            if (content.length) {
+                setDevelopers(content)
             } else {
                 await createDeveloper({
                     name: 'Сергей',

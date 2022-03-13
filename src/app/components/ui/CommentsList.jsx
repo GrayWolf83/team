@@ -7,10 +7,14 @@ const CommentsList = ({ developerId }) => {
     const { getCommentsByDeveloperId } = useComments()
     const comments = getCommentsByDeveloperId(developerId)
 
+    const sortComments = () => {
+        return comments.sort((a, b) => (a.date < b.date ? 1 : -1))
+    }
+
     return (
         <div className="row mt-3">
             {comments.length ? (
-                comments.map((item) => (
+                sortComments().map((item) => (
                     <CommentCard comment={item} key={item.id} />
                 ))
             ) : (

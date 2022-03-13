@@ -64,10 +64,7 @@ const AuthProvider = ({ children }) => {
 
     async function createUser(data) {
         try {
-            console.log(data)
-
             const { content } = await userService.create(data)
-            console.log(content)
             setUser(content)
         } catch (error) {
             errorCatcher(error)
@@ -83,7 +80,6 @@ const AuthProvider = ({ children }) => {
                 password,
                 returnSecureToken: true
             })
-            // console.log("response", data);
             // заносим токены в localStorage
             setTokens(data)
             await getUserData()

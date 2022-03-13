@@ -27,7 +27,7 @@ const UserProvider = ({ children }) => {
     async function getUsers() {
         try {
             const { content } = await userService.get()
-            setUsers(Object.values(content).map((item) => item))
+            setUsers(content)
         } catch (error) {
             errorCatcher(error)
         } finally {
