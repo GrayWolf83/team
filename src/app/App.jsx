@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import LogOut from './components/ui/logOut'
 import Navbar from './components/ui/Navbar'
 import AuthProvider from './hooks/useAuth'
 import { CommentsProvider } from './hooks/useComments'
@@ -14,9 +15,9 @@ import HomePage from './pages/HomePage'
 function App() {
     return (
         <>
-            <Navbar />
-            <DataProvider>
-                <AuthProvider>
+            <AuthProvider>
+                <Navbar />
+                <DataProvider>
                     <CommentsProvider>
                         <UserProvider>
                             <Switch>
@@ -24,6 +25,8 @@ function App() {
                                     path={'/favorites'}
                                     component={FavoritesPage}
                                 />
+                                <Route path="/logout" component={LogOut} />
+
                                 <Route
                                     path={'/comments/:developerId?'}
                                     component={CommentsPage}
@@ -41,8 +44,8 @@ function App() {
                             </Switch>
                         </UserProvider>
                     </CommentsProvider>
-                </AuthProvider>
-            </DataProvider>
+                </DataProvider>
+            </AuthProvider>
         </>
     )
 }

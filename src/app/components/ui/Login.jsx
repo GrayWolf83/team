@@ -1,12 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FormComponent from '../common/FormComponent'
 import TextField from '../common/form/TextField'
 import { loginSchema } from '../../validation/yup.schema'
 import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
 
 const Login = () => {
-    const handleSubmit = (payload) => {
+    const history = useHistory()
+
+    const { signIn } = useAuth()
+    const [errors, setErrors] = useState({})
+
+    useEffect(() => {
+        if (errors !== null) {
+            console.log(errors)
+            toast(errors)
+            setErrors(null)
+        }
+    }, [errors])
+
+    const handleSubmit = async (payload) => {
         console.log(payload)
+        try {
+            await signIn(payload)
+            history.push(
+                history.location.state
+                    ? history.location.state.from.pathname
+                    : '/'
+            )
+        } catch (error) {
+            // console.log(error)
+            setErrors(error)
+        }
     }
 
     return (
@@ -18,10 +45,10 @@ const Login = () => {
                         btnLabel="Войти"
                         onSubmit={handleSubmit}
                         validationSchema={loginSchema}>
-                        <TextField name="email" label="email" type="email" />
+                        <TextField name="email" label="Email" type="email" />
                         <TextField
                             name="password"
-                            label="пароль"
+                            label="Пароль"
                             type="password"
                         />
                     </FormComponent>

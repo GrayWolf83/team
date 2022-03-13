@@ -64,8 +64,10 @@ const AuthProvider = ({ children }) => {
 
     async function createUser(data) {
         try {
+            console.log(data)
+
             const { content } = await userService.create(data)
-            // console.log(content);
+            console.log(content)
             setUser(content)
         } catch (error) {
             errorCatcher(error)
@@ -111,6 +113,8 @@ const AuthProvider = ({ children }) => {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${keyFireBasePrivate}`
 
         try {
+            console.log({ email, password, ...rest })
+
             const { data } = await httpAuth.post(url, {
                 email,
                 password,
