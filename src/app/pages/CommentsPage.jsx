@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import TextAreaField from '../components/common/form/TextAreaField'
 import TextField from '../components/common/form/TextField'
 import FormComponent from '../components/common/FormComponent'
@@ -9,6 +9,7 @@ import { commentSchema } from '../validation/yup.schema'
 import { createComment } from '../utils/createComment'
 import { useComments } from '../hooks/useComments'
 import CommentsList from '../components/ui/CommentsList'
+import Breadcrumb from '../components/common/Breadcrumb'
 
 const CommentsPage = () => {
     const { developerId } = useParams()
@@ -21,46 +22,55 @@ const CommentsPage = () => {
         const content = createComment({ ...data, developerId })
         addComment(content)
     }
-
+    if (!developerId) return <Redirect to={'/'} />
     return (
-        <div className="container mt-4">
-            <h1 className="mb-5 text-center">Отзывы</h1>
-            <div className="row">
-                <div className="col d-flex justify-content-start align-items-center">
-                    <img
-                        src={developer.image}
-                        className="img-thumbnail rounded-circle me-3"
-                        alt={developer.name}
-                    />
-                    <h3>
-                        {developer.name}{' '}
-                        <Badge color="info" content={developer.role} />
-                    </h3>
-                </div>
-            </div>
+        <div className="mt-3">
+            <Breadcrumb
+                crumbs={[{ title: 'Главная', path: '/' }, { title: 'Отзывы' }]}
+            />
 
-            <div className="row mt-3">
-                <div className="card shadow">
-                    <div className="card-body">
-                        <h5 className="card-title text-primary">
-                            Добавить отзыв
-                        </h5>
-                        <div className="row">
-                            <div className="col-12 col-md-8 offset-md-2">
-                                <FormComponent
-                                    btnLabel="Добавить"
-                                    validationSchema={commentSchema}
-                                    onSubmit={handleSubmit}>
-                                    <TextField name="name" label="Имя" />
-                                    <TextAreaField label="Отзыв" name="text" />
-                                </FormComponent>
+            <div className="container mt-4">
+                <h1 className="mb-5 text-center">Отзывы</h1>
+                <div className="row">
+                    <div className="col d-flex justify-content-start align-items-center">
+                        <img
+                            src={developer.image}
+                            className="img-thumbnail rounded-circle me-3"
+                            alt={developer.name}
+                        />
+                        <h3>
+                            {developer.name}{' '}
+                            <Badge color="info" content={developer.role} />
+                        </h3>
+                    </div>
+                </div>
+
+                <div className="row mt-3">
+                    <div className="card shadow">
+                        <div className="card-body">
+                            <h5 className="card-title text-primary">
+                                Добавить отзыв
+                            </h5>
+                            <div className="row">
+                                <div className="col-12 col-md-8 offset-md-2">
+                                    <FormComponent
+                                        btnLabel="Добавить"
+                                        validationSchema={commentSchema}
+                                        onSubmit={handleSubmit}>
+                                        <TextField name="name" label="Имя" />
+                                        <TextAreaField
+                                            label="Отзыв"
+                                            name="text"
+                                        />
+                                    </FormComponent>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <CommentsList comments={comments} />
+                <CommentsList comments={comments} />
+            </div>
         </div>
     )
 }
