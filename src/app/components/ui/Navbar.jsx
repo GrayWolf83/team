@@ -1,7 +1,9 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 
 const Navbar = () => {
+    const { currentUser } = useAuth()
     return (
         <nav className="navbar navbar-dark bg-primary">
             <div className="container">
@@ -11,13 +13,19 @@ const Navbar = () => {
 
                 <ul className="navbar-nav justify-content-end pe-3 ms-auto">
                     <li className="nav-item">
-                        <NavLink
-                            className="text-white-link"
-                            aria-current="page"
-                            exact
-                            to="/auth/login">
-                            Войти
-                        </NavLink>
+                        {currentUser ? (
+                            <Link to="/logout" className="text-white-link">
+                                Выйти
+                            </Link>
+                        ) : (
+                            <NavLink
+                                className="text-white-link"
+                                aria-current="page"
+                                exact
+                                to="/auth/login">
+                                Войти
+                            </NavLink>
+                        )}
                     </li>
                 </ul>
 

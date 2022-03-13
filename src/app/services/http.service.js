@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { httpAuth } from '../hooks/useAuth'
 // import authService from './auth.service'
-import localStorageService from './localStorage.service'
+import localStorageService, { setTokens } from './localStorage.service'
 
 const http = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT
@@ -25,6 +26,17 @@ http.interceptors.request.use(
             //     expiresIn: data.expires_id,
             //     localId: data.user_id
             // })
+            const { data } = await httpAuth.post('token', {
+                grant_type: 'refresh_token',
+                refresh_token: refreshToken
+            })
+
+            setTokens({
+                idToken: data.id_token,
+                refreshToken: data.refresh_token,
+                expiresIn: data.expires_in,
+                localId: data.user_id
+            })
         }
         const accessToken = localStorageService.getAccessToken()
         if (accessToken) {
@@ -40,7 +52,6 @@ http.interceptors.request.use(
 http.interceptors.response.use(
     (res) => {
         res.data = { content: { ...res.data } }
-
         return res
     },
     function (error) {

@@ -36,7 +36,7 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         validationData()
-
+        console.log('submit')
         if (
             Object.keys(error).length ||
             Object.values(data).every((item) => item.trim() === '')
@@ -47,7 +47,7 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(event) => handleSubmit(event)}>
             {React.Children.map(children, (child) => {
                 const config = {
                     ...child.props,

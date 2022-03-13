@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FormComponent from '../common/FormComponent'
 import TextField from '../common/form/TextField'
 import { registerSchema } from '../../validation/yup.schema'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
+import { useHistory } from 'react-router-dom'
 
 const Register = () => {
-    const handleSubmit = (payload) => {
+    const history = useHistory()
+
+    const { signUp } = useAuth()
+    const [errors, setErrors] = useState({})
+
+    useEffect(() => {
+        if (errors !== null) {
+            toast(errors)
+            setErrors(null)
+        }
+    }, [errors])
+
+    const handleSubmit = async (payload) => {
         console.log(payload)
+        try {
+            await signUp({ ...payload, bookmark: false })
+            history.push('/')
+        } catch (error) {
+            setErrors(error)
+        }
     }
 
     return (
@@ -15,14 +36,14 @@ const Register = () => {
             <div className="row">
                 <div className="col-12 col-md-8 offset-md-2">
                     <FormComponent
-                        btnLabel="Войти"
+                        btnLabel="Зарегистрироваться"
                         onSubmit={handleSubmit}
                         validationSchema={registerSchema}>
-                        <TextField name="name" label="имя" />
-                        <TextField name="email" label="email" type="email" />
+                        <TextField name="name" label="Имя" />
+                        <TextField name="email" label="Email" type="email" />
                         <TextField
                             name="password"
-                            label="пароль"
+                            label="Пароль"
                             type="password"
                         />
                     </FormComponent>
