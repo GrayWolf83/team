@@ -7,7 +7,7 @@ const FavoritesPage = () => {
     const developers = getBookmarkedDevelopers()
 
     return (
-        <div className="container pt-5">
+        <div className="container mt-4">
             <h1 className="mb-5 text-center">Избранные разработчики</h1>
             <div className="row">
                 {developers.length ? (

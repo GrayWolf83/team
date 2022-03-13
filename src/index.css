@@ -41,6 +41,11 @@ i.bi {
     color: var(--primary-color) !important;
 }
 
+.text-white-link {
+    color: #fff !important;
+    text-decoration: none;
+}
+
 .btn-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
@@ -120,7 +125,7 @@ i.bi {
 
 .loader-wrap {
     display: flex;
-    padding-top: 50px;
+    padding-top: 30vh;
     justify-content: center;
 }
 
@@ -144,4 +149,9 @@ i.bi {
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: 0.25rem;
+}
+
+.img-thumbnail {
+    width: 100px;
+    height: 100px;
 }
