@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
     async function getDeveloperList() {
         try {
             const { content } = await developerService.getDevelopers()
-            if (content.length) {
+            if (content?.length) {
                 setDevelopers(content)
             } else {
                 await createDeveloper({

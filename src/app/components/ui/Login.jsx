@@ -23,11 +23,11 @@ const Login = () => {
     const handleSubmit = async (payload) => {
         try {
             await signIn(payload)
-            history.push(
-                history.location.state
-                    ? history.location.state.from.pathname
-                    : '/'
-            )
+            if (history.location.state) {
+                history.push(history.location.state.path)
+            } else {
+                history.push('/')
+            }
         } catch (error) {
             setErrors(error)
         }

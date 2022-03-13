@@ -14,12 +14,12 @@ const CreateCommentsForm = ({ developerId }) => {
     const history = useHistory()
 
     const handleSubmit = (data) => {
-        const content = createComment({
-            ...data,
-            developerId,
-            userId: currentUser.id
-        })
         if (currentUser) {
+            const content = createComment({
+                ...data,
+                developerId,
+                userId: currentUser?.id
+            })
             addComment(content)
         } else {
             history.push('/auth/login', { path: history.location.pathname })

@@ -23,7 +23,9 @@ const Register = () => {
     const handleSubmit = async (payload) => {
         try {
             await signUp({ ...payload, bookmark: false })
-            history.push('/')
+            history.push(
+                history.location.state ? history.location.state.path : '/'
+            )
         } catch (error) {
             setErrors(error)
         }
