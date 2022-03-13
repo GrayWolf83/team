@@ -1,11 +1,12 @@
 import { nanoid } from 'nanoid'
 
-export const createDeveloperData = ({ name, age, role, image }) => {
+export const createDeveloperData = ({ name, age, role, image, contacts }) => {
     return {
         id: nanoid(),
         name,
         age,
         role,
+        contacts,
         skills: [
             { title: 'HTML', value: random(50, 80) },
             { title: 'CSS', value: random(70, 90) },

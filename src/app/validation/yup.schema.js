@@ -9,11 +9,7 @@ export const commentSchema = object({
         .min(4, {
             name: 'text',
             text: 'Минимальная длина 4 символа'
-        }),
-    name: string().required({
-        name: 'name',
-        text: 'Поле обязательно к заполнению'
-    })
+        })
 })
 
 export const registerSchema = object({

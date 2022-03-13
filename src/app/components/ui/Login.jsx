@@ -3,10 +3,19 @@ import FormComponent from '../common/FormComponent'
 import TextField from '../common/form/TextField'
 import { loginSchema } from '../../validation/yup.schema'
 import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
+    const history = useHistory()
+
     const handleSubmit = (payload) => {
         console.log(payload)
+
+        if (history.location.state) {
+            history.push(history.location.state.path)
+        } else {
+            history.push('/')
+        }
     }
 
     return (

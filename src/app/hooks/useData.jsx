@@ -30,19 +30,31 @@ export const DataProvider = ({ children }) => {
                     name: 'Сергей',
                     age: 38,
                     role: 'TeamLead',
-                    image: 'https://avatars.dicebear.com/api/avataaars/7rii5l.svg'
+                    image: 'https://avatars.dicebear.com/api/avataaars/7rii5l.svg',
+                    contacts: {
+                        github: 'https://github.com/GrayWolf83',
+                        telegram: 'https://t.me/SergeyBernyakovich'
+                    }
                 })
                 await createDeveloper({
                     name: 'Максим',
                     age: 22,
                     role: 'Developer',
-                    image: 'https://avatars.dicebear.com/api/avataaars/uufr4k.svg'
+                    image: 'https://avatars.dicebear.com/api/avataaars/uufr4k.svg',
+                    contacts: {
+                        github: 'https://github.com/foxxman',
+                        telegram: 'https://t.me/foxxman'
+                    }
                 })
                 await createDeveloper({
                     name: 'Бешил',
                     age: 25,
                     role: 'Developer',
-                    image: 'https://avatars.dicebear.com/api/avataaars/apabe.svg'
+                    image: 'https://avatars.dicebear.com/api/avataaars/apabe.svg',
+                    contacts: {
+                        github: 'https://github.com/Beshil',
+                        telegram: 'https://t.me/Beshill'
+                    }
                 })
                 await getDeveloperList()
             }
@@ -55,7 +67,6 @@ export const DataProvider = ({ children }) => {
 
     async function createDeveloper(devData) {
         const developer = createDeveloperData(devData)
-        console.log(developer)
         try {
             await developerService.createDeveloper(developer)
         } catch (error) {
