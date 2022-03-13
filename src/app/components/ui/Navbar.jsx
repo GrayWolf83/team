@@ -8,6 +8,19 @@ const Navbar = () => {
                 <NavLink className="navbar-brand mb-0" to={'/'}>
                     Team
                 </NavLink>
+
+                <ul className="navbar-nav justify-content-end pe-3 ms-auto">
+                    <li className="nav-item">
+                        <NavLink
+                            className="text-white-link"
+                            aria-current="page"
+                            exact
+                            to="/auth/login">
+                            Войти
+                        </NavLink>
+                    </li>
+                </ul>
+
                 <button
                     className="navbar-toggler"
                     type="button"
