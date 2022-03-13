@@ -3,21 +3,23 @@ import { useParams } from 'react-router-dom'
 import TextAreaField from '../components/common/form/TextAreaField'
 import TextField from '../components/common/form/TextField'
 import FormComponent from '../components/common/FormComponent'
-import Badge from '../components/ui/Badge'
+import Badge from '../components/common/Badge'
 import { useData } from '../hooks/useData'
-import { reviewSchema } from '../validation/yup.schema'
-// import { getDateToString } from '../utils/getDateToString'
+import { commentSchema } from '../validation/yup.schema'
 import { createComment } from '../utils/createComment'
+import { useComments } from '../hooks/useComments'
+import CommentsList from '../components/ui/CommentsList'
 
-const ReviewsPage = () => {
+const CommentsPage = () => {
     const { developerId } = useParams()
-    const { getDeveloperById, addReview } = useData()
+    const { getDeveloperById } = useData()
+    const { addComment, getCommentsByDeveloperId } = useComments()
     const developer = getDeveloperById(developerId)
+    const comments = getCommentsByDeveloperId(developerId)
 
     const handleSubmit = (data) => {
         const content = createComment({ ...data, developerId })
-        console.log('content', content)
-        addReview(content)
+        addComment(content)
     }
 
     return (
@@ -47,7 +49,7 @@ const ReviewsPage = () => {
                             <div className="col-12 col-md-8 offset-md-2">
                                 <FormComponent
                                     btnLabel="Добавить"
-                                    validationSchema={reviewSchema}
+                                    validationSchema={commentSchema}
                                     onSubmit={handleSubmit}>
                                     <TextField name="name" label="Имя" />
                                     <TextAreaField label="Отзыв" name="text" />
@@ -58,29 +60,9 @@ const ReviewsPage = () => {
                 </div>
             </div>
 
-            {/* <div className="row mt-3">
-                {developer.reviews.length ? (
-                    developer.reviews.map((item) => (
-                        <div className="card mb-2" key={item.text}>
-                            <div className="card-body">
-                                <p className="card-text w-100 d-flex jusstify-content-around">
-                                    {item.name}{' '}
-                                    <span className="text-primary fst-italic ms-auto">
-                                        {getDateToString(item.date)}
-                                    </span>
-                                </p>
-                                <p>{item.text}</p>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-center">
-                        У этого разработчика еще нет отзывов
-                    </p>
-                )}
-            </div> */}
+            <CommentsList comments={comments} />
         </div>
     )
 }
 
-export default ReviewsPage
+export default CommentsPage

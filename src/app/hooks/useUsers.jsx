@@ -26,9 +26,10 @@ const UserProvider = ({ children }) => {
             const { content } = await userService.get()
 
             setUsers(content)
-            setLoading(false)
         } catch (error) {
             errorCatcher(error)
+        } finally {
+            setLoading(false)
         }
     }
     function errorCatcher(error) {

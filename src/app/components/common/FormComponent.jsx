@@ -8,7 +8,7 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     const [error, setError] = useState({})
 
     const validationData = async () => {
-        if (!Object.values(data).every((item) => item === '')) {
+        if (!Object.values(data).every((item) => item.trim() === '')) {
             await validationSchema
                 .validate(data)
                 .then(() => setError({}))
@@ -21,6 +21,10 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     useEffect(() => {
         validationData()
     }, [data])
+
+    useEffect(() => {
+        return () => setData({})
+    }, [])
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -35,12 +39,11 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
 
         if (
             Object.keys(error).length ||
-            Object.values(data).every((item) => item === '')
+            Object.values(data).every((item) => item.trim() === '')
         ) {
             return
         }
         onSubmit(data)
-        setData({})
     }
 
     return (

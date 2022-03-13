@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import { useData } from '../../hooks/useData'
-import Badge from './Badge'
+import Badge from '../common/Badge'
 import localStorageService from '../../services/localStorage.service'
 import { useEffect } from 'react'
 
@@ -43,7 +43,7 @@ const DevCard = ({ developer }) => {
                         Подробнее
                     </NavLink>
                     <NavLink
-                        to={`/reviews/${developer.id}`}
+                        to={`/comments/${developer.id}`}
                         className="btn btn-info text-white shadow">
                         Отзывы
                     </NavLink>

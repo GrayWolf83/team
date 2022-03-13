@@ -21,7 +21,6 @@ export const DataProvider = ({ children }) => {
     }, [])
 
     async function getDeveloperList() {
-        setLoading(true)
         try {
             const { content } = await developerService.getDevelopers()
             if (Object.keys(content).length) {
@@ -55,15 +54,12 @@ export const DataProvider = ({ children }) => {
     }
 
     async function createDeveloper(devData) {
-        setLoading(true)
         const developer = createDeveloperData(devData)
         console.log(developer)
         try {
             await developerService.createDeveloper(developer)
         } catch (error) {
             console.log(error)
-        } finally {
-            setLoading(false)
         }
     }
 

@@ -1,6 +1,6 @@
 import { object, string } from 'yup'
 
-export const reviewSchema = object({
+export const commentSchema = object({
     text: string()
         .required({
             name: 'text',
