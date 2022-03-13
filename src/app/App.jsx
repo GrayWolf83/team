@@ -1,5 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import LogOut from './components/ui/logOut'
 import Navbar from './components/ui/Navbar'
 import AuthProvider from './hooks/useAuth'
@@ -46,6 +48,7 @@ function App() {
                     </CommentsProvider>
                 </DataProvider>
             </AuthProvider>
+            <ToastContainer />
         </>
     )
 }

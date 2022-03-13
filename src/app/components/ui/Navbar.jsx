@@ -14,9 +14,11 @@ const Navbar = () => {
                 <ul className="navbar-nav justify-content-end pe-3 ms-auto">
                     <li className="nav-item">
                         {currentUser ? (
-                            <Link to="/logout" className="text-white-link">
-                                Выйти
-                            </Link>
+                            <p>
+                                <Link to="/logout" className="text-white-link">
+                                    Выйти
+                                </Link>
+                            </p>
                         ) : (
                             <NavLink
                                 className="text-white-link"

@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (error !== null) {
-            toast(error)
+            toast.error(error.message)
             setError(null)
         }
     }, [error])
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
     }
 
     function errorCatcher(error) {
-        const { message } = error.response.data
+        const { message } = error.response.data.error
         setError(message)
     }
 
@@ -88,16 +88,12 @@ const AuthProvider = ({ children }) => {
             const { code, message } = error.response.data.error
 
             if (code === 400) {
-                if (message === 'EMAIL_NOT_FOUND') {
-                    const errorObject = {
-                        email: 'Email не найден'
-                    }
-                    throw errorObject
-                }
-                if (message === 'INVALID_PASSWORD') {
-                    const errorObject = {
-                        password: 'Неправильный пароль'
-                    }
+                if (
+                    message === 'EMAIL_NOT_FOUND' ||
+                    message === 'INVALID_PASSWORD'
+                ) {
+                    const errorObject = { message: 'Ошибка авторизации' }
+
                     throw errorObject
                 }
             }
@@ -109,8 +105,6 @@ const AuthProvider = ({ children }) => {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${keyFireBasePrivate}`
 
         try {
-            console.log({ email, password, ...rest })
-
             const { data } = await httpAuth.post(url, {
                 email,
                 password,
@@ -119,7 +113,6 @@ const AuthProvider = ({ children }) => {
 
             // заносим токены в localStorage
             setTokens(data)
-            //   console.log("dataAuth", data);
             await createUser({
                 id: data.localId,
                 email,
@@ -137,7 +130,7 @@ const AuthProvider = ({ children }) => {
             if (code === 400) {
                 if (message === 'EMAIL_EXISTS') {
                     const errorObject = {
-                        email: 'Пользователь с таким Email уже существует'
+                        message: 'Пользователь с таким email уже существует'
                     }
                     throw errorObject
                 }

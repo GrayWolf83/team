@@ -23,7 +23,7 @@ export const CommentsProvider = ({ children }) => {
         setLoading(true)
         try {
             const { content } = await commentService.getComments()
-            if (content.length) {
+            if (content?.length) {
                 setComments(content)
             }
         } catch (error) {

@@ -36,7 +36,6 @@ const FormComponent = ({ children, btnLabel, onSubmit, validationSchema }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         validationData()
-        console.log('submit')
         if (
             Object.keys(error).length ||
             Object.values(data).every((item) => item.trim() === '')

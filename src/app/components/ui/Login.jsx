@@ -15,8 +15,7 @@ const Login = () => {
 
     useEffect(() => {
         if (errors !== null) {
-            console.log(errors)
-            toast(errors)
+            toast.error(errors.message)
             setErrors(null)
         }
     }, [errors])

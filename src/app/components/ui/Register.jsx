@@ -15,13 +15,12 @@ const Register = () => {
 
     useEffect(() => {
         if (errors !== null) {
-            toast(errors)
+            toast.error(errors.message)
             setErrors(null)
         }
     }, [errors])
 
     const handleSubmit = async (payload) => {
-        console.log(payload)
         try {
             await signUp({ ...payload, bookmark: false })
             history.push('/')
