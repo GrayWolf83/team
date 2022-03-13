@@ -121,7 +121,7 @@ const AuthProvider = ({ children }) => {
             setTokens(data)
             //   console.log("dataAuth", data);
             await createUser({
-                _id: data.localId,
+                id: data.localId,
                 email,
                 image: `https://avatars.dicebear.com/api/avataaars/${(
                     Math.random() + 1
