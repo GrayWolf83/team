@@ -14,7 +14,12 @@ const Navbar = () => {
                 <ul className="navbar-nav justify-content-end pe-3 ms-auto">
                     <li className="nav-item">
                         {currentUser ? (
-                            <p>
+                            <p className="d-flex align-items-center mb-0">
+                                <img
+                                    src={currentUser.image}
+                                    style={{ width: 30 }}
+                                    className="rounded-circle me-2"
+                                />
                                 <Link to="/logout" className="text-white-link">
                                     Выйти
                                 </Link>
